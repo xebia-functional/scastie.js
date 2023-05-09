@@ -1,0 +1,36 @@
+{
+  "name": "scastie.js",
+  "version": "0.0.1",
+  "description": "Web component adding compilation results to Scala code snippets through Scastie",
+  "main": "dist/scastie.js",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "build:production": "webpack --mode='production'",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xebia-functional/scastie.js.git"
+  },
+  "keywords": [
+    "scala",
+    "scastie"
+  ],
+  "author": "xebia-functional",
+  "contributors": [
+    "Juan Valencia Calvellido <juanvalencia@calvellido.es> (https://calvellido.es)"
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/xebia-functional/scastie.js/issues"
+  },
+  "homepage": "https://github.com/xebia-functional/scastie.js#readme",
+  "devDependencies": {
+    "webpack": "5.82.0",
+    "webpack-cli": "5.1.1",
+    "webpack-dev-server": "4.15.0"
+  }
+}
