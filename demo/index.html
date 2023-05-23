@@ -2,31 +2,48 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Test</title>
+    <title>Scastie.js demo</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <p>
-      Simple example printing true
-    </p>
+    <h1>Scastie.js demo</h1>
+
+    <p>Simple example printing true</p>
 
     <pre><code>
 val a: Int = 1
 println(a + 1 == 2)
     </code></pre>
 
-    <p>
-      Simple example printing false
-    </p>
+    <p>Simple example printing false</p>
 
     <pre><code>
 val a: Int = 1
 println(a + 1 == 3)
     </code></pre>
 
+    <p>Example hello world using Scala 2</p>
+
+    <pre><code>
+object hello {
+  def main(args: Array[String]) = {
+    println("Hello, World!")
+  }
+}
+    </code></pre>
+
+    <p>Example hello world using Scala 3</p>
+
+    <pre><code>
+@main def hello() = println("Hello, World!")
+
+hello()
+    </code></pre>
+
     <p>
-      Example needing <code>"com.twitter" %% "util-core" % "22.12.0"</code> dependency
+      Example needing
+      <code>"com.twitter" %% "util-core" % "22.12.0"</code> dependency
     </p>
 
     <pre><code>
@@ -41,9 +58,7 @@ def hello() = println(s"Hello, $output") // => 1000L
 hello()
     </code></pre>
 
-    <p>
-      Example using processed code through highlight.js
-    </p>
+    <p>Example using processed code through highlight.js, and Scala 3</p>
 
     <pre><code class="hljs language-scala">
 <span class="hljs-meta">@main</span> <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">hello</span></span>() = println(<span class="hljs-string">"Hello, World!"</span>)
@@ -52,7 +67,48 @@ hello()
 
     <script src="scastie.js"></script>
     <script>
-      scastie_js('pre code');
+      scastie_js();
+    </script>
+    <!-- 
+      You can find here more possible configurations:
+    -->
+    <!-- <script>
+      scastie_js({
+        selector: "pre code",
+      });
+    </script> -->
+    <!-- <script>
+      scastie_js({
+        theme: {
+          console: "#222",
+        },
+      });
+    </script> -->
+    <!-- <script>
+      scastie_js({
+        selector: "pre code",
+        target: {
+          scalaVersion: "2.13.10",
+          tpe: "Jvm",
+        },
+        libraries: [
+          {
+            groupId: "com.twitter",
+            artifact: "util-core",
+            version: "22.12.0",
+            target: {
+              scalaVersion: "2.13.10",
+              tpe: "Jvm",
+            },
+          },
+        ],
+        theme: {
+          primary: "#002b36",
+          secondary: "#aaa",
+          console: "#555555", 
+          borderRadius: "2px"
+        },
+      }); -->
     </script>
   </body>
 </html>

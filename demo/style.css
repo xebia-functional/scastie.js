@@ -5,6 +5,10 @@ body {
 
 pre.code, pre code {
     display: block;
-    border: 1px solid #000;
+    border: 1px solid #0004;
     padding: 4px;
+}
+
+p {
+    margin-top: 40px;
 }

@@ -1,37 +1,70 @@
-const path = require('path');
+const path = require("path");
 
-module.exports = (params = {}) => {
-  const isProduction = params.production;
-  const env = isProduction ? 'production' : 'development';
-  const mainEntryName = isProduction ? 'scastie.min' : 'scastie';
-  const libraryName = 'scastie_js';
+module.exports = (env, argv) => {
+  const isProduction = env.production || argv.mode == "production";
+
+  const mainEntryName = isProduction ? "scastie.min" : "scastie";
+  const libraryName = "scastie_js";
 
   const config = {
-    mode: env,
+    mode: argv.mode,
 
     entry: {
-      [mainEntryName]: ['./src/index'],
+      [mainEntryName]: ["./src/styles/vars.css", "./src/index.js"],
     },
 
     output: {
-      path: path.resolve(__dirname, 'dist'),
-      filename: '[name].js',
+      path: path.resolve(__dirname, "dist"),
+      filename: "[name].js",
       library: {
         name: libraryName,
-        type: 'umd',
-        export: 'default',
+        type: "umd",
+        export: "default",
       },
     },
 
-    devtool: 'source-map',
+    target: "web",
+
+    ...(!isProduction && { devtool: "eval-cheap-source-map" }),
+
+    module: {
+      rules: [
+        {
+          test: /\.css$/,
+          use: [
+            "style-loader",
+            {
+              loader: "css-loader",
+              options: {
+                importLoaders: 1,
+                modules: {
+                  exportLocalsConvention: "camelCaseOnly",
+                  localIdentHashFunction: "xxhash64",
+                  localIdentName: isProduction
+                    ? "scastie-[hash:base64:5]"
+                    : "[path][name]__[local]",
+                },
+              },
+            },
+          ],
+          include: /\.module\.css$/,
+        },
+        {
+          test: /\.css$/,
+          use: ["style-loader", "css-loader"],
+          exclude: /\.module\.css$/,
+        },
+      ],
+    },
 
     plugins: [],
 
     devServer: {
+      hot: false, // Further code logic changes are needed for this to work properly
       static: {
-        directory: path.join(__dirname, 'demo'),
+        directory: path.join(__dirname, "demo"),
       },
-    }
+    },
   };
 
   return config;
